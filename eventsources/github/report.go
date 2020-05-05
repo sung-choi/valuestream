@@ -2,11 +2,12 @@ package github
 
 import (
 	"context"
-	"github.com/shurcooL/githubv4"
-	"golang.org/x/oauth2"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/shurcooL/githubv4"
+	"golang.org/x/oauth2"
 )
 
 func NewClient(ctx context.Context, accessToken string) *githubv4.Client {
@@ -53,14 +54,16 @@ func NewClient(ctx context.Context, accessToken string) *githubv4.Client {
 */
 
 type PullRequest struct {
-	Number    int
-	CreatedAt time.Time
-	MergedAt  time.Time
-	ClosedAt  time.Time
-	UpdatedAt time.Time
-	Merged    bool
-	Closed    bool
-	Comments  struct {
+	Number         int
+	State          string
+	ReviewDecision string
+	CreatedAt      time.Time
+	MergedAt       time.Time
+	ClosedAt       time.Time
+	UpdatedAt      time.Time
+	Merged         bool
+	Closed         bool
+	Comments       struct {
 		TotalCount int
 	}
 	Additions int

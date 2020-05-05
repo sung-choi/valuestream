@@ -3,19 +3,21 @@ package sources
 import (
 	"context"
 	"fmt"
+	"strconv"
+
 	"github.com/ImpactInsights/valuestream/cmd/vsperformancereport/metrics"
 	vsgh "github.com/ImpactInsights/valuestream/eventsources/github"
 	"github.com/gocarina/gocsv"
-	"strconv"
 
 	// "github.com/gocarina/gocsv"
-	"github.com/shurcooL/githubv4"
-	log "github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
 	"io"
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/shurcooL/githubv4"
+	log "github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
 )
 
 type Conf struct {
@@ -194,22 +196,24 @@ func Repos(ctx context.Context, conf *Conf) ([]vsgh.Repository, error) {
 func NewPullRequestPerformanceMetric(repo vsgh.Repository, pr vsgh.PullRequest) metrics.PullRequestPerformanceMetric {
 	// TODO nil checks
 	m := metrics.PullRequestPerformanceMetric{
-		Owner:        repo.Login,
-		Repo:         repo.Name,
-		CreatedAt:    pr.CreatedAt,
-		Merged:       pr.Merged,
-		Comments:     pr.Comments.TotalCount,
-		Additions:    pr.Additions,
-		Deletions:    pr.Deletions,
-		TotalChanges: pr.Additions + pr.Deletions,
-		ID:           strconv.FormatInt(int64(pr.Number), 10),
-		MergedAt:     pr.MergedAt,
-		ClosedAt:     pr.ClosedAt,
-		UpdatedAt:    pr.UpdatedAt,
-		Author:       pr.Author.Login,
-		Url:          pr.Url,
-		Title:        pr.Title,
-		Reviewers:    pr.Reviewers(),
+		Owner:          repo.Login,
+		Repo:           repo.Name,
+		ReviewDecision: pr.ReviewDecision,
+		State:          pr.State,
+		CreatedAt:      pr.CreatedAt,
+		Merged:         pr.Merged,
+		Comments:       pr.Comments.TotalCount,
+		Additions:      pr.Additions,
+		Deletions:      pr.Deletions,
+		TotalChanges:   pr.Additions + pr.Deletions,
+		ID:             strconv.FormatInt(int64(pr.Number), 10),
+		MergedAt:       pr.MergedAt,
+		ClosedAt:       pr.ClosedAt,
+		UpdatedAt:      pr.UpdatedAt,
+		Author:         pr.Author.Login,
+		Url:            pr.Url,
+		Title:          pr.Title,
+		Reviewers:      pr.Reviewers(),
 	}
 
 	// if this was merged use the mergedAt - CreatedAt

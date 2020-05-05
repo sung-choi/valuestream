@@ -2,22 +2,25 @@ package metrics
 
 import (
 	"fmt"
-	"github.com/gocarina/gocsv"
-	"github.com/jinzhu/now"
-	"github.com/montanaflynn/stats"
-	"github.com/urfave/cli/v2"
 	"math"
 	"os"
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/gocarina/gocsv"
+	"github.com/jinzhu/now"
+	"github.com/montanaflynn/stats"
+	"github.com/urfave/cli/v2"
 )
 
 type PullRequestPerformanceMetric struct {
-	Owner     string    `csv:"owner"`
-	Repo      string    `csv:"repo"`
-	CreatedAt time.Time `csv:"created_at"`
-	Merged    bool      `csv:"merged"`
+	Owner          string    `csv:"owner"`
+	Repo           string    `csv:"repo"`
+	State          string    `csv:"state"`
+	ReviewDecision string    `csv:"reviewDecision"`
+	CreatedAt      time.Time `csv:"created_at"`
+	Merged         bool      `csv:"merged"`
 	// Duration will use time to merged, if not will use
 	// time to cosed
 	DurationSeconds    float64   `csv:"duration"`
