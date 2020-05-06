@@ -25,12 +25,14 @@ type PullRequestPerformanceMetric struct {
 	// time to cosed
 	DurationSeconds    float64   `csv:"duration"`
 	Comments           int       `csv:"comments"`
+	Reviews            int       `csv:"reviews"`
+	Reactions          int       `csv:"reactions"`
 	Additions          int       `csv:"additions"`
 	Deletions          int       `csv:"deletions"`
 	TotalChanges       int       `csv:"total_changes"`
 	DurationPerComment float64   `csv:"duration_per_comment"`
 	DurationPerLine    float64   `csv:"duration_per_line"`
-	ID                 string    `csv"pr_id"`
+	ID                 string    `csv:"pr_id"`
 	MergedAt           time.Time `csv:"merged_at"`
 	ClosedAt           time.Time `csv:"closed_at"`
 	UpdatedAt          time.Time `csv:"updated_at"`

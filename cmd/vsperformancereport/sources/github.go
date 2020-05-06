@@ -203,6 +203,8 @@ func NewPullRequestPerformanceMetric(repo vsgh.Repository, pr vsgh.PullRequest) 
 		CreatedAt:      pr.CreatedAt,
 		Merged:         pr.Merged,
 		Comments:       pr.Comments.TotalCount,
+		Reactions:      pr.Reactions.TotalCount,
+		Reviews:        pr.Reviews.TotalCount,
 		Additions:      pr.Additions,
 		Deletions:      pr.Deletions,
 		TotalChanges:   pr.Additions + pr.Deletions,

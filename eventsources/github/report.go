@@ -66,6 +66,12 @@ type PullRequest struct {
 	Comments       struct {
 		TotalCount int
 	}
+	Reviews struct {
+		TotalCount int
+	}
+	Reactions struct {
+		TotalCount int
+	}
 	Additions int
 	Deletions int
 	Author    struct {
